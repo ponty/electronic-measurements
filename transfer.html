@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Voltage Transfer Curve &mdash; electronic-measurements 0.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="electronic-measurements 0.0.0 documentation" href="index.html" />
+    <link rel="prev" title="Oscilloscope" href="scope.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="scope.html" title="Oscilloscope"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">electronic-measurements 0.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="voltage-transfer-curve">
+<h1>Voltage Transfer Curve<a class="headerlink" href="#voltage-transfer-curve" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Inverter_%28logic_gate%29#Performance_measurement">http://en.wikipedia.org/wiki/Inverter_%28logic_gate%29#Performance_measurement</a></p>
+<p>Schematic:</p>
+<div class="highlight-python"><pre>.-----------------------------------------------------------------.
+|                         Arduino                                 |
+|                                    pin_x_in=A2                  |
+|                                                                 |
+|                         pin_amp_out=A1   |                      |
+|  pin_pwm=D9                              |    pin_x_out=A3      |
+|                              |           |         |            |
+'-----------------------------------------------------------------'
+       |  100k        MC33201  |Vamp       |Vin      |Vout
+       |  ___            |\    |           |         |
+       '-|___|--o--------|+\   |     ___   |  .---.  |
+                |        |  &gt;--o----|___|--o--| X |--o
+               ---      -|-/   |           |  '---'  |
+          100n ---     | |/    |   R=120  ---       ---
+                |      |       |          --- 100n  --- 100n
+                       |       |           |         |
+               GND     '-------'          GND       GND</pre>
+</div>
+<div class="section" id="transfer-plot">
+<h2>transfer plot<a class="headerlink" href="#transfer-plot" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="pc">
+<h3>7486PC<a class="headerlink" href="#pc" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//transfer-1.py">Source code</a>, <a class="reference external" href=".//transfer-1.png">png</a>, <a class="reference external" href=".//transfer-1.hires.png">hires.png</a>, <a class="reference external" href=".//transfer-1.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/transfer-1.png" src="_images/transfer-1.png" />
+</div>
+</div>
+<div class="section" id="ls00">
+<h3>74LS00<a class="headerlink" href="#ls00" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//transfer-2.py">Source code</a>, <a class="reference external" href=".//transfer-2.png">png</a>, <a class="reference external" href=".//transfer-2.hires.png">hires.png</a>, <a class="reference external" href=".//transfer-2.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/transfer-2.png" src="_images/transfer-2.png" />
+</div>
+</div>
+<div class="section" id="cd4011">
+<h3>CD4011<a class="headerlink" href="#cd4011" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//transfer-3.py">Source code</a>, <a class="reference external" href=".//transfer-3.png">png</a>, <a class="reference external" href=".//transfer-3.hires.png">hires.png</a>, <a class="reference external" href=".//transfer-3.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/transfer-3.png" src="_images/transfer-3.png" />
+</div>
+</div>
+<div class="section" id="k155la3">
+<h3>K155LA3<a class="headerlink" href="#k155la3" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//transfer-4.py">Source code</a>, <a class="reference external" href=".//transfer-4.png">png</a>, <a class="reference external" href=".//transfer-4.hires.png">hires.png</a>, <a class="reference external" href=".//transfer-4.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/transfer-4.png" src="_images/transfer-4.png" />
+</div>
+</div>
+<div class="section" id="ks74hctls14">
+<h3>KS74HCTLS14<a class="headerlink" href="#ks74hctls14" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//transfer-5.py">Source code</a>, <a class="reference external" href=".//transfer-5.png">png</a>, <a class="reference external" href=".//transfer-5.hires.png">hires.png</a>, <a class="reference external" href=".//transfer-5.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/transfer-5.png" src="_images/transfer-5.png" />
+</div>
+</div>
+<div class="section" id="short">
+<h3>short<a class="headerlink" href="#short" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//transfer-6.py">Source code</a>, <a class="reference external" href=".//transfer-6.png">png</a>, <a class="reference external" href=".//transfer-6.hires.png">hires.png</a>, <a class="reference external" href=".//transfer-6.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/transfer-6.png" src="_images/transfer-6.png" />
+</div>
+</div>
+</div>
+<div class="section" id="analog-value-time-plot">
+<h2>analog value time plot<a class="headerlink" href="#analog-value-time-plot" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>7486PC<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//transfer-7.py">Source code</a>, <a class="reference external" href=".//transfer-7.png">png</a>, <a class="reference external" href=".//transfer-7.hires.png">hires.png</a>, <a class="reference external" href=".//transfer-7.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/transfer-7.png" src="_images/transfer-7.png" />
+</div>
+</div>
+<div class="section" id="id2">
+<h3>74LS00<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//transfer-8.py">Source code</a>, <a class="reference external" href=".//transfer-8.png">png</a>, <a class="reference external" href=".//transfer-8.hires.png">hires.png</a>, <a class="reference external" href=".//transfer-8.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/transfer-8.png" src="_images/transfer-8.png" />
+</div>
+</div>
+<div class="section" id="id3">
+<h3>CD4011<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//transfer-9.py">Source code</a>, <a class="reference external" href=".//transfer-9.png">png</a>, <a class="reference external" href=".//transfer-9.hires.png">hires.png</a>, <a class="reference external" href=".//transfer-9.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/transfer-9.png" src="_images/transfer-9.png" />
+</div>
+</div>
+<div class="section" id="id4">
+<h3>K155LA3<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//transfer-10.py">Source code</a>, <a class="reference external" href=".//transfer-10.png">png</a>, <a class="reference external" href=".//transfer-10.hires.png">hires.png</a>, <a class="reference external" href=".//transfer-10.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/transfer-10.png" src="_images/transfer-10.png" />
+</div>
+</div>
+<div class="section" id="id5">
+<h3>KS74HCTLS14<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//transfer-11.py">Source code</a>, <a class="reference external" href=".//transfer-11.png">png</a>, <a class="reference external" href=".//transfer-11.hires.png">hires.png</a>, <a class="reference external" href=".//transfer-11.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/transfer-11.png" src="_images/transfer-11.png" />
+</div>
+</div>
+<div class="section" id="id6">
+<h3>short<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//transfer-12.py">Source code</a>, <a class="reference external" href=".//transfer-12.png">png</a>, <a class="reference external" href=".//transfer-12.hires.png">hires.png</a>, <a class="reference external" href=".//transfer-12.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/transfer-12.png" src="_images/transfer-12.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Voltage Transfer Curve</a><ul>
+<li><a class="reference internal" href="#transfer-plot">transfer plot</a><ul>
+<li><a class="reference internal" href="#pc">7486PC</a></li>
+<li><a class="reference internal" href="#ls00">74LS00</a></li>
+<li><a class="reference internal" href="#cd4011">CD4011</a></li>
+<li><a class="reference internal" href="#k155la3">K155LA3</a></li>
+<li><a class="reference internal" href="#ks74hctls14">KS74HCTLS14</a></li>
+<li><a class="reference internal" href="#short">short</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analog-value-time-plot">analog value time plot</a><ul>
+<li><a class="reference internal" href="#id1">7486PC</a></li>
+<li><a class="reference internal" href="#id2">74LS00</a></li>
+<li><a class="reference internal" href="#id3">CD4011</a></li>
+<li><a class="reference internal" href="#id4">K155LA3</a></li>
+<li><a class="reference internal" href="#id5">KS74HCTLS14</a></li>
+<li><a class="reference internal" href="#id6">short</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="scope.html"
+                        title="previous chapter">Oscilloscope</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/transfer.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="scope.html" title="Oscilloscope"
+             >previous</a> |</li>
+        <li><a href="index.html">electronic-measurements 0.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, ponty.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Curve tracer &mdash; electronic-measurements 0.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="electronic-measurements 0.0.0 documentation" href="index.html" />
+    <link rel="next" title="MCU output pin IV curve" href="mcuoutput.html" />
+    <link rel="prev" title="About" href="readme.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mcuoutput.html" title="MCU output pin IV curve"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="readme.html" title="About"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">electronic-measurements 0.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="curve-tracer">
+<h1>Curve tracer<a class="headerlink" href="#curve-tracer" title="Permalink to this headline">¶</a></h1>
+<dl class="docutils">
+<dt>known problems:</dt>
+<dd><ul class="first last simple">
+<li>noisy</li>
+<li>slow</li>
+</ul>
+</dd>
+</dl>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Curve_tracer">http://en.wikipedia.org/wiki/Curve_tracer</a></p>
+<p><a class="reference external" href="http://en.wikipedia.org/wiki/Current%E2%80%93voltage_characteristic">http://en.wikipedia.org/wiki/Current%E2%80%93voltage_characteristic</a></p>
+<p>Schematic:</p>
+<div class="highlight-python"><pre>.-----------------------------------------------------------------.
+|                         Arduino                                 |
+|                                    pin_x_in=A2                  |
+|                                                                 |
+|                         pin_amp_out=A1   |                      |
+|  pin_pwm=D9                              |    pin_x_out=A3      |
+|                              |           |         |pin_rail=D10|
+'-----------------------------------------------------------------'
+       |  100k        MC33201  |           |         |     |
+       |  ___            |\    |           |         |     |
+       '-|___|--o--------|+\   |     ___   |  .---.  |     |
+                |        |  &gt;--o----|___|--o--| X |--o-----'
+               ---      -|-/   |              '---'
+          100n ---     | |/    |   R=120
+                |      |       |
+                       |       |
+               GND     '-------'
+                             Vamp         Vin        Vout</pre>
+</div>
+<div class="section" id="iv-curve-plot">
+<h2>IV curve plot<a class="headerlink" href="#iv-curve-plot" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="n4002">
+<h3>1N4002<a class="headerlink" href="#n4002" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//curvetracer-1.py">Source code</a>, <a class="reference external" href=".//curvetracer-1.png">png</a>, <a class="reference external" href=".//curvetracer-1.hires.png">hires.png</a>, <a class="reference external" href=".//curvetracer-1.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/curvetracer-1.png" src="_images/curvetracer-1.png" />
+</div>
+</div>
+<div class="section" id="n4148">
+<h3>1N4148<a class="headerlink" href="#n4148" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//curvetracer-2.py">Source code</a>, <a class="reference external" href=".//curvetracer-2.png">png</a>, <a class="reference external" href=".//curvetracer-2.hires.png">hires.png</a>, <a class="reference external" href=".//curvetracer-2.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/curvetracer-2.png" src="_images/curvetracer-2.png" />
+</div>
+</div>
+<div class="section" id="bzx55c-2v7">
+<h3>BZX55C 2V7<a class="headerlink" href="#bzx55c-2v7" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//curvetracer-3.py">Source code</a>, <a class="reference external" href=".//curvetracer-3.png">png</a>, <a class="reference external" href=".//curvetracer-3.hires.png">hires.png</a>, <a class="reference external" href=".//curvetracer-3.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/curvetracer-3.png" src="_images/curvetracer-3.png" />
+</div>
+</div>
+<div class="section" id="open">
+<h3>open<a class="headerlink" href="#open" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//curvetracer-4.py">Source code</a>, <a class="reference external" href=".//curvetracer-4.png">png</a>, <a class="reference external" href=".//curvetracer-4.hires.png">hires.png</a>, <a class="reference external" href=".//curvetracer-4.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/curvetracer-4.png" src="_images/curvetracer-4.png" />
+</div>
+</div>
+<div class="section" id="red-led">
+<h3>red LED<a class="headerlink" href="#red-led" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//curvetracer-5.py">Source code</a>, <a class="reference external" href=".//curvetracer-5.png">png</a>, <a class="reference external" href=".//curvetracer-5.hires.png">hires.png</a>, <a class="reference external" href=".//curvetracer-5.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/curvetracer-5.png" src="_images/curvetracer-5.png" />
+</div>
+</div>
+<div class="section" id="short">
+<h3>short<a class="headerlink" href="#short" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//curvetracer-6.py">Source code</a>, <a class="reference external" href=".//curvetracer-6.png">png</a>, <a class="reference external" href=".//curvetracer-6.hires.png">hires.png</a>, <a class="reference external" href=".//curvetracer-6.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/curvetracer-6.png" src="_images/curvetracer-6.png" />
+</div>
+</div>
+</div>
+<div class="section" id="analog-value-time-plot">
+<h2>analog value time plot<a class="headerlink" href="#analog-value-time-plot" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>1N4002<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//curvetracer-7.py">Source code</a>, <a class="reference external" href=".//curvetracer-7.png">png</a>, <a class="reference external" href=".//curvetracer-7.hires.png">hires.png</a>, <a class="reference external" href=".//curvetracer-7.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/curvetracer-7.png" src="_images/curvetracer-7.png" />
+</div>
+</div>
+<div class="section" id="id2">
+<h3>1N4148<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//curvetracer-8.py">Source code</a>, <a class="reference external" href=".//curvetracer-8.png">png</a>, <a class="reference external" href=".//curvetracer-8.hires.png">hires.png</a>, <a class="reference external" href=".//curvetracer-8.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/curvetracer-8.png" src="_images/curvetracer-8.png" />
+</div>
+</div>
+<div class="section" id="id3">
+<h3>BZX55C 2V7<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//curvetracer-9.py">Source code</a>, <a class="reference external" href=".//curvetracer-9.png">png</a>, <a class="reference external" href=".//curvetracer-9.hires.png">hires.png</a>, <a class="reference external" href=".//curvetracer-9.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/curvetracer-9.png" src="_images/curvetracer-9.png" />
+</div>
+</div>
+<div class="section" id="id4">
+<h3>open<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//curvetracer-10.py">Source code</a>, <a class="reference external" href=".//curvetracer-10.png">png</a>, <a class="reference external" href=".//curvetracer-10.hires.png">hires.png</a>, <a class="reference external" href=".//curvetracer-10.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/curvetracer-10.png" src="_images/curvetracer-10.png" />
+</div>
+</div>
+<div class="section" id="id5">
+<h3>red LED<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//curvetracer-11.py">Source code</a>, <a class="reference external" href=".//curvetracer-11.png">png</a>, <a class="reference external" href=".//curvetracer-11.hires.png">hires.png</a>, <a class="reference external" href=".//curvetracer-11.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/curvetracer-11.png" src="_images/curvetracer-11.png" />
+</div>
+</div>
+<div class="section" id="id6">
+<h3>short<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//curvetracer-12.py">Source code</a>, <a class="reference external" href=".//curvetracer-12.png">png</a>, <a class="reference external" href=".//curvetracer-12.hires.png">hires.png</a>, <a class="reference external" href=".//curvetracer-12.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/curvetracer-12.png" src="_images/curvetracer-12.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Curve tracer</a><ul>
+<li><a class="reference internal" href="#iv-curve-plot">IV curve plot</a><ul>
+<li><a class="reference internal" href="#n4002">1N4002</a></li>
+<li><a class="reference internal" href="#n4148">1N4148</a></li>
+<li><a class="reference internal" href="#bzx55c-2v7">BZX55C 2V7</a></li>
+<li><a class="reference internal" href="#open">open</a></li>
+<li><a class="reference internal" href="#red-led">red LED</a></li>
+<li><a class="reference internal" href="#short">short</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analog-value-time-plot">analog value time plot</a><ul>
+<li><a class="reference internal" href="#id1">1N4002</a></li>
+<li><a class="reference internal" href="#id2">1N4148</a></li>
+<li><a class="reference internal" href="#id3">BZX55C 2V7</a></li>
+<li><a class="reference internal" href="#id4">open</a></li>
+<li><a class="reference internal" href="#id5">red LED</a></li>
+<li><a class="reference internal" href="#id6">short</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="readme.html"
+                        title="previous chapter">About</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mcuoutput.html"
+                        title="next chapter">MCU output pin IV curve</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/curvetracer.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mcuoutput.html" title="MCU output pin IV curve"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="readme.html" title="About"
+             >previous</a> |</li>
+        <li><a href="index.html">electronic-measurements 0.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, ponty.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

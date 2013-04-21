@@ -1,0 +1,167 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>MCU digital input curve &mdash; electronic-measurements 0.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="electronic-measurements 0.0.0 documentation" href="index.html" />
+    <link rel="next" title="Op-amp I/O range" href="swing.html" />
+    <link rel="prev" title="MCU output pin IV curve" href="mcuoutput.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="swing.html" title="Op-amp I/O range"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mcuoutput.html" title="MCU output pin IV curve"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">electronic-measurements 0.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mcu-digital-input-curve">
+<h1>MCU digital input curve<a class="headerlink" href="#mcu-digital-input-curve" title="Permalink to this headline">¶</a></h1>
+<p>Schematic:</p>
+<div class="highlight-python"><pre>.-----------------------------------------------------------------.
+|                         Arduino                                 |
+|                                     pin_an_in=A2                |
+|                                                                 |
+|                          pin_amp_out     |  pin_dig_in=D8       |
+|  pin_pwm=D9                              |        |             |
+|                              |           |        |             |
+'-----------------------------------------------------------------'
+       |  100k        MC33201  |        Ain|        |Din
+       |  ___            |\    |           |        |
+       '-|___|--o--------|+\   |     ___   |        |
+                |        |  &gt;--o----|___|--o--------o
+               ---      -|-/   |                    |
+          100n ---     | |/    |     120           --- 1u
+                |      |       |                   ---
+                       |       |                    |
+               GND     '-------'                   GND
+                             Vamp</pre>
+</div>
+<div class="section" id="dig-input-plot">
+<h2>dig input plot<a class="headerlink" href="#dig-input-plot" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="atmega88">
+<h3>ATmega88<a class="headerlink" href="#atmega88" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//mcudiginput-1.py">Source code</a>, <a class="reference external" href=".//mcudiginput-1.png">png</a>, <a class="reference external" href=".//mcudiginput-1.hires.png">hires.png</a>, <a class="reference external" href=".//mcudiginput-1.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/mcudiginput-1.png" src="_images/mcudiginput-1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="analog-value-time-plot">
+<h2>analog value time plot<a class="headerlink" href="#analog-value-time-plot" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>ATmega88<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//mcudiginput-2.py">Source code</a>, <a class="reference external" href=".//mcudiginput-2.png">png</a>, <a class="reference external" href=".//mcudiginput-2.hires.png">hires.png</a>, <a class="reference external" href=".//mcudiginput-2.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/mcudiginput-2.png" src="_images/mcudiginput-2.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">MCU digital input curve</a><ul>
+<li><a class="reference internal" href="#dig-input-plot">dig input plot</a><ul>
+<li><a class="reference internal" href="#atmega88">ATmega88</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analog-value-time-plot">analog value time plot</a><ul>
+<li><a class="reference internal" href="#id1">ATmega88</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mcuoutput.html"
+                        title="previous chapter">MCU output pin IV curve</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="swing.html"
+                        title="next chapter">Op-amp I/O range</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/mcudiginput.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="swing.html" title="Op-amp I/O range"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mcuoutput.html" title="MCU output pin IV curve"
+             >previous</a> |</li>
+        <li><a href="index.html">electronic-measurements 0.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, ponty.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

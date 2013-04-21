@@ -1,0 +1,166 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>PWM loopback test &mdash; electronic-measurements 0.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="electronic-measurements 0.0.0 documentation" href="index.html" />
+    <link rel="next" title="Oscilloscope" href="scope.html" />
+    <link rel="prev" title="Op-amp I/O range" href="swing.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="scope.html" title="Oscilloscope"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="swing.html" title="Op-amp I/O range"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">electronic-measurements 0.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pwm-loopback-test">
+<h1>PWM loopback test<a class="headerlink" href="#pwm-loopback-test" title="Permalink to this headline">¶</a></h1>
+<p>Schematic:</p>
+<div class="highlight-python"><pre>.-------------------.
+|                   |
+|                   |
+|      pin_in=A0    )------------.
+|                   |            |
+|                   |     100k   |
+|                   |     ___    |
+|      pin_pwm=D9   )----|___|---o
+|                   |            |
+|                   |            |
+|                   |           ---
+|                   |           ---  100n
+|                   |            |
+|          GND      )------------'
+|                   |
+|                   |
+'-------------------'</pre>
+</div>
+<div class="section" id="transfer-error-plot">
+<h2>transfer error plot<a class="headerlink" href="#transfer-error-plot" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="atmega88">
+<h3>ATmega88<a class="headerlink" href="#atmega88" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//pwm-1.py">Source code</a>, <a class="reference external" href=".//pwm-1.png">png</a>, <a class="reference external" href=".//pwm-1.hires.png">hires.png</a>, <a class="reference external" href=".//pwm-1.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/pwm-1.png" src="_images/pwm-1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="analog-value-time-plot">
+<h2>analog value time plot<a class="headerlink" href="#analog-value-time-plot" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>ATmega88<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>(<a class="reference external" href=".//pwm-2.py">Source code</a>, <a class="reference external" href=".//pwm-2.png">png</a>, <a class="reference external" href=".//pwm-2.hires.png">hires.png</a>, <a class="reference external" href=".//pwm-2.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/pwm-2.png" src="_images/pwm-2.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">PWM loopback test</a><ul>
+<li><a class="reference internal" href="#transfer-error-plot">transfer error plot</a><ul>
+<li><a class="reference internal" href="#atmega88">ATmega88</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#analog-value-time-plot">analog value time plot</a><ul>
+<li><a class="reference internal" href="#id1">ATmega88</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="swing.html"
+                        title="previous chapter">Op-amp I/O range</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="scope.html"
+                        title="next chapter">Oscilloscope</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/pwm.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="scope.html" title="Oscilloscope"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="swing.html" title="Op-amp I/O range"
+             >previous</a> |</li>
+        <li><a href="index.html">electronic-measurements 0.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, ponty.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
