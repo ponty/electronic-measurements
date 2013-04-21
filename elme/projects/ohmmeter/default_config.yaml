@@ -1,0 +1,7 @@
+window: 150
+pin_middle: A0
+toplist:
+- {R: 470, pin_rail: D11, pin_input: A4}
+- {R: 21800, pin_rail: A3, pin_input: A5}
+- {R: 1004000, pin_rail: D8} 
+pullup: 0

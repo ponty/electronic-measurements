@@ -1,0 +1,12 @@
+R: 120
+pin_amp_out: A1
+pin_out_an: A3
+pin_out_dig: D10
+pin_pwm: D9
+pwm: 
+ divisor: 1 
+ start: 0 
+ end: 255
+ repeat: 10
+ wait_before_step: 0.010 
+ wait_before_big_step: 0.500 

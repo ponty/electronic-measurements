@@ -1,0 +1,30 @@
+R1: 10000
+R2: 100000
+loads:
+-
+  Rload: 47000
+  pin_load:   D12
+-
+  Rload: 4700
+  pin_load:   D11
+-
+  Rload: 470
+  pin_load:   D8
+  
+#- [D12, Rload: 47000]
+#- [D11, Rload: 4700]
+#- [D8, Rload: 470]
+
+pin_in_minus: A1
+pin_in_plus: A0
+pin_out: A2
+pin_pwm_minus: D10
+pin_pwm_plus: D9
+pwm: 
+ divisor: 1 
+ start: 0 
+ end: 255
+ repeat: 10
+ wait_before_step: 0.010 
+ wait_before_big_step: 0.500 
+

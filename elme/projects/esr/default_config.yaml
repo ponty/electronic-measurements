@@ -1,0 +1,14 @@
+pin_in: A4
+pin_pwm: D9
+window: 20
+settle_time: 1
+R1: 330
+R2: 10
+Ramp1: 10000
+Ramp2: 100000
+freq:
+ min: 1000
+ max: 100000
+ steps: 2
+ #19
+    

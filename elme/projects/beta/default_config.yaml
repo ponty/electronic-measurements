@@ -1,0 +1,21 @@
+filter_size: 50
+nodes:
+ - name: 1
+   pin_middle: A0
+   toplist:
+      - {pin_rail: D11, R: 470,  pin_input: A4}
+      - {pin_rail: D8,  R: 1000000} 
+ - name: 2
+   pin_middle: A1
+   toplist:
+      - {pin_rail: D12, R: 470}
+      - {pin_rail: D9,  R: 1000000} 
+ - name: 3
+   pin_middle: A2
+   toplist:
+      - {pin_rail: D13, R: 470}
+      - {pin_rail: D10, R: 1000000} 
+
+
+
+#- {R: 21800, pin_rail: A3, pin_input: A5}

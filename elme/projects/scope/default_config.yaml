@@ -1,0 +1,3 @@
+interval: 0.2 
+pin: A0 
+reset: 0

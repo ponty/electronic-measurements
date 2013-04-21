@@ -1,0 +1,16 @@
+window: 2000
+pin_middle: A0
+toplist:
+#- {R: 470, pin_pwm: D9}
+- {R: 21800, pin_pwm: D9}
+#- {R: 1000000, pin_pwm: D9} 
+#- {R: 470, pin_pwm: D11}
+#- {R: 21800, pin_pwm: A3, pin_input: A5}
+#- {R: 1000000, pin_pwm: D8} 
+#pullup: 0
+freq:
+ min: 1000
+ max: 100000
+ steps: 19
+settle_time: 0.1
+ 
