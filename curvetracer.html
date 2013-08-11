@@ -72,16 +72,16 @@
 |  pin_pwm=D9                              |    pin_x_out=A3      |
 |                              |           |         |pin_rail=D10|
 '-----------------------------------------------------------------'
-       |  100k        MC33201  |           |         |     |
+       |  100k        MC33201  |        Vin|     Vout|     |
        |  ___            |\    |           |         |     |
        '-|___|--o--------|+\   |     ___   |  .---.  |     |
                 |        |  &gt;--o----|___|--o--| X |--o-----'
-               ---      -|-/   |              '---'
-          100n ---     | |/    |   R=120
-                |      |       |
-                       |       |
-               GND     '-------'
-                             Vamp         Vin        Vout</pre>
+               ---      -|-/   |           |  '---'  |
+          100n ---     | |/    |   R=120  ---       ---
+                |      |       |          --- 100n  --- 100n
+                       |       |           |         |
+               GND     '-------'          GND       GND
+                             Vamp</pre>
 </div>
 <div class="section" id="iv-curve-plot">
 <h2>IV curve plot<a class="headerlink" href="#iv-curve-plot" title="Permalink to this headline">¶</a></h2>
