@@ -56,6 +56,15 @@ transfer plot
     Project('transfer').plot('transfer_plot').embed('data/transfer/7486PC.zip')
 
 
+74HC14
+++++++++++++++++++++++++++++++++++
+
+.. plot::
+
+    from elme.project import Project
+    Project('transfer').plot('transfer_plot').embed('data/transfer/74HC14.zip')
+
+
 74LS00
 ++++++++++++++++++++++++++++++++++
 
@@ -112,6 +121,15 @@ analog value time plot
 
     from elme.project import Project
     Project('transfer').plot('analog_value_time_plot').embed('data/transfer/7486PC.zip')
+
+
+74HC14
+++++++++++++++++++++++++++++++++++
+
+.. plot::
+
+    from elme.project import Project
+    Project('transfer').plot('analog_value_time_plot').embed('data/transfer/74HC14.zip')
 
 
 74LS00
