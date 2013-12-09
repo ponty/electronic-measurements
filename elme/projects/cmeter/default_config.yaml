@@ -1,0 +1,5 @@
+C0: 1e-9
+gate_time: 0.5
+pin_enable_input: D0
+repeat_disable_input: 3
+repeat_enable_input: 40
