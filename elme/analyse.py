@@ -30,15 +30,13 @@ def segmented_measurements(measurements, keys, as_index=False):
 
 def averaged_median_arr(e):
     rolling_median_window = 3
-#        return e[0]
     try:
         if len(e) >= rolling_median_window:
             e = pandas.rolling_median(
                 e, window=rolling_median_window, min_periods=1)
         agg = numpy.mean(e)
     except ValueError:
-#        assert 0,e
-        agg = None  # e[0]
+        agg = None  
     return agg
 
 
@@ -46,8 +44,6 @@ def filter_measurements(measurements, keys, variables=None):
 #    grouped = segmented_measurements(measurements[variables+keys], keys)
     grouped = segmented_measurements(measurements, keys)
 #    grouped = measurements.groupby(keys, sort=False, as_index=False)
-#    for x,y in grouped.items():
-#        print 44,x,y
     filtered = grouped.agg(averaged_median_arr)
     return filtered
 

@@ -56,4 +56,19 @@ def analyse(data):
     if len(ok)==1:
         polarity,B=ok.index[0]
         m=m[np.logical_and(m.polarity==polarity,m.B==B)]
+ 
+    del m['Ue']
+    del m['Urc']
+    del m['Urb']
+    del m['Ub']
+    del m['Uc']
+    del m['Ab']
+    del m['Ac']
+    del m['t']
+#     del m['Ib']
+    del m['Ic']
+    del m['Ie']
+    del m['Rb']
+    del m['Rc']
+         
     return m

@@ -1,5 +1,6 @@
-from util import none
+from elme.util import r_round
 from uncertainties import nominal_value
+from util import none
 
 OMEGA = u'\u03A9'
 
@@ -67,6 +68,7 @@ def format_charge(x):
 
 
 def format_ohmE12(x):
+    x=r_round(x, rounding='E-12')
     (x, prefix) = round_value(x)
     postfix = OMEGA
     if x >= 10:

@@ -1,5 +1,4 @@
 from configobj import ConfigObj
-from path import path
 from elme.gui.controls import readonly, button
 from elme.gui.inputbox import inputbox
 from elme.gui.mpleditor import MPLFigureEditor
@@ -7,9 +6,11 @@ from elme.gui.textbox import textbox
 from elme.gui.wnd import FigureWnd
 from elme.project import Project
 from elme.util import tmpdir
-from traits.trait_types import Any, Enum, CSet, List, Button
+from path import path
+from traits.trait_types import Any, Enum, CSet, List, Button, Str
+from traitsui.editors.code_editor import CodeEditor
 from traitsui.editors.enum_editor import EnumEditor
-from traitsui.group import HGroup, Group
+from traitsui.group import HGroup, Group, Tabbed
 from traitsui.item import Item
 from traitsui.message import message
 from traitsui.view import View
@@ -98,6 +99,9 @@ class PlotWnd(FigureWnd):
 #    @traced
     def _measurement_changed(self):
         self.update_figure()
+        self.result = ''
+        self.result = self.project.analyse_str(self.mfullpath(self.measurement))
+        
 
     def _plot_type_changed(self):
         self.update_figure()
@@ -236,6 +240,9 @@ class PlotWnd(FigureWnd):
 #    def measure(self, conf, stop_condition):
 #        data = measure(self.conf)
 #        return data
+    result = Str()
+
+
     view = View(
         Group(
             Item(name='dummy',
@@ -280,10 +287,15 @@ class PlotWnd(FigureWnd):
 
         ),
         '_',
-        Group(
+        Tabbed(
         Item('figure',
              editor=MPLFigureEditor(),
              show_label=False
+             ),
+        Item(name='result',
+             show_label=False,
+             style='readonly',
+             editor=CodeEditor(),
              ),
         ),
         width=900,

@@ -26,8 +26,8 @@ def schematic(cog, projname):
 TIMEPLOT = 'analog_value_time_plot'
 
 
-def plots(cog, projname, plot_types=[]):
-    if TIMEPLOT not in plot_types:
+def plots(cog, projname, plot_types=[], auto_time_plot=True):
+    if auto_time_plot and TIMEPLOT not in plot_types:
         plot_types += [TIMEPLOT]
     d = path('docs/data/' + projname)
     if not d.exists():

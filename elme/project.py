@@ -340,9 +340,11 @@ class Project(object):
         return '%s.%s' % (self.module_name, subname)
 
     def submodule(self, subname):
-        return  importlib.import_module(self.submodule_name(subname))
+        try:
+            return  importlib.import_module(self.submodule_name(subname))
+        except ImportError:
+            pass
 
-#    @traced
     def measure(self, zipfilename=''):
         HOME_DIR.mkdir_p()
         measure_func = self.submodule('measure').measure
@@ -362,7 +364,10 @@ class Project(object):
 #        dw.save(zipfilename)
 
     def analyse(self, zipfilename):
-        analyse_func = self.submodule('analyse').analyse
+        mod=self.submodule('analyse')
+        if not mod:
+            return
+        analyse_func = mod.analyse
         data = self.load(zipfilename)
         result = analyse_func(data)
 #        result=bunchify(result)

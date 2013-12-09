@@ -16,7 +16,7 @@ known problems:
 Schematic::
 
         .-------------------.    
-        |                   |    
+        |  Arduino          |    
         |                   |    
         |                   |    
         |                   |    

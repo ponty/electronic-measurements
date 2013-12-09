@@ -11,6 +11,7 @@ class FigureWrapper(object):
                  convert2voltage=False,
                  log_x_axis=False,
                  log_y_axis=False,
+                 draw_axis=True,
                  ):
         self.data = data
         self.convert2voltage = convert2voltage
@@ -22,7 +23,7 @@ class FigureWrapper(object):
 #        dw = DataWrapper(data)
 #        dw.calculate_trel()
 #        self.datawrapper = dw
-        fig = self.figure = figure
+        self.figure = figure
         ax = self.subplot = figure.add_subplot(111)
         if x == 'time':
             if not title:
@@ -53,11 +54,15 @@ class FigureWrapper(object):
 
         if log_x_axis:
             ax.set_xscale('log')
+            draw_axis=False
         if log_y_axis:
             ax.set_yscale('log')
-        if not log_x_axis and not log_y_axis:
-            ax.axvline(x=0, color='black')  # not recommended for log axis
-            ax.axhline(y=0, color='black')  # not recommended for log axis
+            draw_axis=False
+        if draw_axis:
+            # not recommended for auto range
+            # not recommended for log axis
+            ax.axvline(x=0, color='black')  
+            ax.axhline(y=0, color='black')
 
         if not ylimits:
             if y == 'analog_value':
@@ -106,7 +111,6 @@ class FigureWrapper(object):
 #                    if not filter_func or filter_func(r)]
 
     def addcol(self, x=None, y=None, legend=None, lineformat=None, filter_func=None, sortbyx=None):
-#        dw = self.datawrapper
         ax = self.subplot
         if x and not callable(x):
             ax.set_xlabel(x)
@@ -119,7 +123,6 @@ class FigureWrapper(object):
         if not lineformat:
             lineformat = '-o'
 
-#        f1 = y
         if not callable(y):
             if not legend:
                 legend = y
@@ -135,15 +138,12 @@ class FigureWrapper(object):
             ls = sorted(zip(xcol, ycol), key=lambda e: e[0])
             xcol = [e[0] for e in ls]
             ycol = [e[1] for e in ls]
-#        print 888,xcol
-#        print 888,ycol
         assert len(xcol) == len(ycol)
         assert len(xcol)
         assert len(ycol)
         ax.plot(
             nominal_values(xcol),
             nominal_values(ycol),
-            #            [func(e) for e in dw.data.measurements],
             lineformat,
             label=legend)
         self.update_legend()
