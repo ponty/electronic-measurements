@@ -12,7 +12,6 @@ try:
 except ImportError:
     from yaml import Loader, Dumper
 
-# from yaml import Loader, Dumper
 
 
 def string_presenter(dumper, data):
@@ -26,8 +25,8 @@ def string_presenter(dumper, data):
 
     return dumper.represent_scalar('tag:yaml.org,2002:str', data, style=style)
 yaml.add_representer(str, string_presenter, Dumper=Dumper)
+yaml.add_representer(unicode, string_presenter, Dumper=Dumper)
 
-#@traced
 
 
 def ufloat_presenter(dumper, data):
