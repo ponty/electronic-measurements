@@ -1,4 +1,4 @@
-pin_in: A4
+pin_in: A5
 pin_pwm: D9
 window: 20
 settle_time: 1
@@ -7,8 +7,8 @@ R2: 10
 Ramp1: 10000
 Ramp2: 100000
 freq:
- min: 1000
+ min: 10000
  max: 100000
- steps: 2
+ steps: 10
  #19
     
