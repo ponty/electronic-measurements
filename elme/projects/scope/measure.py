@@ -1,16 +1,16 @@
-from softusbduino.arduino import Arduino
 from elme.timer import Stopwatch
 import logging
+from nanpy.arduinotree import ArduinoTree
 
 log = logging.getLogger(__name__)
 
 
 def measure(config, stop_condition=None):
-    mcu = Arduino()
+    mcu = ArduinoTree()
     if config.reset:
-        mcu.pins.reset()
-    vcc = mcu.vcc.voltage
-    pin = mcu.pin(config.pin)
+        mcu.soft_reset()
+    vcc = mcu.vcc.read()
+    pin = mcu.pin.get(config.pin)
     interval = config.interval
 
     measurements = []
@@ -18,7 +18,7 @@ def measure(config, stop_condition=None):
     while 1:
         measurements.append(dict(
                             t=timer.read(),
-                            A=pin.read_analog(),
+                            A=pin.read_analog_value(),
                             ))
         if timer.last > interval:
             break
@@ -28,7 +28,7 @@ def measure(config, stop_condition=None):
 
     data = dict(
         vcc=vcc,
-        model=mcu.model,
+        model=mcu.avr_name,
         measurements=measurements,
     )
 

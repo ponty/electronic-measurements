@@ -1,8 +1,7 @@
-from decotrace import traced
 from matplotlib.ticker import AutoMinorLocator
-from softusbduino.util import an2v
 from uncertainties.unumpy.core import nominal_values
 import matplotlib
+from elme.util import an2v
 
 
 class FigureWrapper(object):

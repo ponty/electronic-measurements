@@ -1,6 +1,6 @@
 from __future__ import division
-from softusbduino.util import an2v
 from elme.analyse import filter_measurements
+from elme.util import an2v
 
 
 def extend(data):

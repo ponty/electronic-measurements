@@ -1,10 +1,11 @@
 from __future__ import division
 from numpy.ma.core import size
-from softusbduino.util import an2v
 from elme.analyse import filter_measurements
 from elme.pandasext import ColsProxy, movecol
 from uncertainties.unumpy.core import uarray, nominal_values
 import numpy as np
+from elme.util import an2v
+
 
 def calculate_beta(m, vcc):
         col = ColsProxy(m)

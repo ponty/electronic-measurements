@@ -1,9 +1,9 @@
 from __future__ import division
-from softusbduino import Arduino
-from softusbduino.const import OUTPUT, INPUT
+from nanpy.arduinotree import ArduinoTree
 from elme.timer import Stopwatch, TimeOutError
 import time
 
+INPUT,OUTPUT=0,1
 
 def timeout_loop(timeout, loop_func):
     timer2 = Stopwatch()
@@ -14,10 +14,10 @@ def timeout_loop(timeout, loop_func):
 
 
 def measure(config):
-    mcu = Arduino()
-    mcu.pins.reset()
-    vcc = mcu.vcc.voltage
-    p_middle = mcu.pin(config.pin_middle)
+    mcu = ArduinoTree()
+    mcu.soft_reset()
+    vcc = mcu.vcc.read()
+    p_middle = mcu.pin.get(config.pin_middle)
     measurements = []
 
     timer = Stopwatch()
@@ -25,15 +25,15 @@ def measure(config):
 
     toplist = sorted(config.toplist, key=lambda e: e.R)
     top_charge = toplist[0]
-    pin_charge = mcu.pin(top_charge.pin_rail)
+    pin_charge = mcu.pin.get(top_charge.pin_rail)
 
     def         setcharge(value, limit):
         measurements = []
         pin_charge.write_mode(OUTPUT)
-        pin_charge.write_digital_out(value)
+        pin_charge.write_digital_value(value)
 
         def loop_func():
-            a = p_middle.read_analog()
+            a = p_middle.read_analog_value()
             measurements.append(dict(
                                 t=timer.read(),
                                 Amiddle=a,
@@ -65,7 +65,7 @@ def measure(config):
 
     def measure1(measurements, pin_rail, pin_input, R):
         def loop_func():
-            Amiddle = p_middle.read_analog()
+            Amiddle = p_middle.read_analog_value()
             measurements.append(dict(
                                 t=timer.read(),
                                 Amiddle=Amiddle,
@@ -80,10 +80,10 @@ def measure(config):
         measurements += charge()
 
         pin_rail.write_mode(OUTPUT)
-        pin_rail.write_digital_out(0)
+        pin_rail.write_digital_value(0)
 
         # first read is not stable by 1MOhm because of A/D capacitor
-        p_middle.read_analog()
+        p_middle.read_analog_value()
 #        if tmeasure:
 #            loop_func()
 #            time.sleep(tmeasure)
@@ -94,8 +94,8 @@ def measure(config):
 #        pin_rail.reset()
 
     for d in toplist:
-        pin_rail = mcu.pin(d['pin_rail'])
-        pin_input = mcu.pin(d['pin_input'])
+        pin_rail = mcu.pin.get(d['pin_rail'])
+        pin_input = mcu.pin.get(d['pin_input'])
         R = d['R']
 #        timer3 = Stopwatch()
         try:
@@ -113,7 +113,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.model,
+        model=mcu.avr_name,
         measurements=measurements,
     )
 

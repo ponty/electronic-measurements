@@ -4,34 +4,33 @@ from elme.projects.swing.analyse import calculate_good_interval
 from elme.projects.swing.circuit import Circuit
 from elme.pwm import PwmManager
 from elme.timer import Stopwatch
-from elme.util import fullrange
-from softusbduino import Arduino
-from softusbduino.const import OUTPUT
-from softusbduino.util import an2pwm
+from elme.util import fullrange, an2pwm
+from nanpy.arduinotree import ArduinoTree, ArduinoTree
 import logging
 import math
 
 log = logging.getLogger(__name__)
 
+INPUT,OUTPUT=0,1
 
 def measure(config):
     A = config.R2 / config.R1
 
-    mcu = Arduino()
-    mcu.pins.reset()
-    vcc = mcu.vcc.voltage
+    mcu = ArduinoTree()
+    mcu.soft_reset()
+    vcc = mcu.vcc.read()
     timer = Stopwatch()
 
     for d in config.loads:
-        mcu.pin(d.pin_load).reset()
+        mcu.pin.get(d.pin_load).reset()
 
-    p_pwm_plus = mcu.pin(config.pin_pwm_plus)
-    p_pwm_minus = mcu.pin(config.pin_pwm_minus)
+    p_pwm_plus = mcu.pin.get(config.pin_pwm_plus)
+    p_pwm_minus = mcu.pin.get(config.pin_pwm_minus)
     pwm_manager = PwmManager(config.pwm, [p_pwm_plus, p_pwm_minus])
 
-    p_in_plus = mcu.pin(config.pin_in_plus)
-    p_in_minus = mcu.pin(config.pin_in_minus)
-    p_out = mcu.pin(config.pin_out)
+    p_in_plus = mcu.pin.get(config.pin_in_plus)
+    p_in_minus = mcu.pin.get(config.pin_in_minus)
+    p_out = mcu.pin.get(config.pin_out)
 
 #    def noise_filter(fread):
 #        filter_size = 5
@@ -43,9 +42,9 @@ def measure(config):
                                     t=timer.read(),
                                     pwm_index_plus=pwm_index_plus,
                                     pwm_index_minus=pwm_index_minus,
-                                    Aplus=p_in_plus.read_analog(),
-                                    Aminus=p_in_minus.read_analog(),
-                                    Aout=p_out.read_analog(),
+                                    Aplus=p_in_plus.read_analog_value(),
+                                    Aminus=p_in_minus.read_analog_value(),
+                                    Aout=p_out.read_analog_value(),
                                     Rload=R,
                                     phase=phase,
                                     ))
@@ -80,8 +79,8 @@ def measure(config):
         loads = [(d.pin_load, d.Rload) for d in config.loads]
         for nr, R in [(None, None)] + loads:
             if nr is not None:
-                mcu.pin(nr).write_mode(OUTPUT)
-                mcu.pin(nr).write_digital_out(0)
+                mcu.pin.get(nr).write_mode(OUTPUT)
+                mcu.pin.get(nr).write_digital_value(0)
 
             # Vminus is fixed in upper range
             Aplus = Circuit(A, Vminus=Ahigh, Vout= -20).Vplus
@@ -103,13 +102,13 @@ def measure(config):
                 measurements += meas(R, pwm_values=ls, phase='output_swing')
 
             if nr is not None:
-                mcu.pin(nr).reset()
+                mcu.pin.get(nr).reset()
 
         return measurements
 
     data = Bunch(
         vcc=vcc,
-        model=mcu.model,
+        model=mcu.avr_name,
         pwm_plus_frequency=p_pwm_plus.pwm.frequency,
         pwm_minus_frequency=p_pwm_minus.pwm.frequency,
         measurements=meas_multi(),

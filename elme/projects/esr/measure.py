@@ -1,22 +1,23 @@
 from __future__ import division
 from math import log10
 from numpy import logspace
-from softusbduino.arduino import Arduino
-from softusbduino.const import OUTPUT
+from nanpy.arduinotree import ArduinoTree
 from elme.timer import Stopwatch
 from elme.util import sleep_and_read
 import time
+from nanpy.arduinotree import ArduinoTree
 
+INPUT,OUTPUT=0,1
 
 def measure(config):
-    mcu = Arduino()
-    mcu.pins.reset()
+    mcu = ArduinoTree()
+    mcu.soft_reset()
 
-    vcc = mcu.vcc.voltage
-    p_in = mcu.pin(config.pin_in)
-    p_pwm = mcu.pin(config.pin_pwm)
-#    p_pwm2 = mcu.pin('D8')
-#    p_pwm_check = mcu.pin(config.pin_pwm_check)
+    vcc = mcu.vcc.read()
+    p_in = mcu.pin.get(config.pin_in)
+    p_pwm = mcu.pin.get(config.pin_pwm)
+#    p_pwm2 = mcu.pin.get('D8')
+#    p_pwm_check = mcu.pin.get(config.pin_pwm_check)
     timer = Stopwatch()
 
     p_pwm.write_mode(OUTPUT)
@@ -24,14 +25,14 @@ def measure(config):
 
 #    def meas_max():
 #        time.sleep(1)
-#        p_pwm2.write_digital_out(1)
+#        p_pwm2.write_digital_value(1)
 #
 #        time.sleep(config.settle_time)
 #
 #        measurements = []
 #        for i in range(config.window):
 #            timer.measure()
-#            Apwm = p_pwm_check.read_analog()
+#            Apwm = p_pwm_check.read_analog_value()
 #            measurements.append(dict(
 #                                t=timer.relativ(),
 # #                                pwm_value=pwm_value,
@@ -58,7 +59,7 @@ def measure(config):
 
         measurements = []
         for i in range(config.window):
-            Ain = p_in.read_analog()
+            Ain = p_in.read_analog_value()
             measurements.append(dict(
                                 t=timer.read(),
                                 Ain=Ain,
@@ -76,7 +77,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.model,
+        model=mcu.avr_name,
         measurements=measurements,
     )
 

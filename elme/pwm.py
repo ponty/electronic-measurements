@@ -1,7 +1,7 @@
-from softusbduino.const import OUTPUT
 from elme.util import fullrange
 import time
 
+INPUT,OUTPUT=0,1
 
 class PwmManager(object):
     def __init__(self, config, pins):

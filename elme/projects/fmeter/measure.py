@@ -1,13 +1,13 @@
 from __future__ import division
 from elme.timer import Stopwatch
-from softusbduino import Arduino
+from nanpy.arduinotree import ArduinoTree
 from uncertainties import nominal_value
 
 
 def measure(config):
-    mcu = Arduino()
-#     mcu.pins.reset()
-    vcc = mcu.vcc.voltage
+    mcu = ArduinoTree()
+#     mcu.soft_reset()
+    vcc = mcu.vcc.read()
 
     timer = Stopwatch()
 
@@ -15,7 +15,7 @@ def measure(config):
 
 #     for _ in range(config.repeat):
     while 1:
-        f = mcu.counter.run(config.gate_time)
+        f = mcu.counter.read(config.gate_time)
         measurements.append(dict(
                             t=timer.read(),
                             frequency=nominal_value(f),
@@ -25,9 +25,9 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.model,
+        model=mcu.avr_name,
         measurements=measurements,
-        gate_time=mcu.counter.gate_time,
+        gate_time=config.gate_time,
     )
 
     return data

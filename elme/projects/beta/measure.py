@@ -1,9 +1,10 @@
 from __future__ import division
-from softusbduino import Arduino
-from softusbduino.const import OUTPUT, INPUT
+from nanpy.arduinotree import ArduinoTree
 from elme.timer import Stopwatch
 import time
 
+
+INPUT,OUTPUT=0,1
 
 class VoltageDivider(object):
     '''
@@ -38,23 +39,23 @@ class VoltageDivider(object):
         Atop = 1023 * top
 
         p_bottom.write_mode(OUTPUT)
-        p_bottom.write_digital_out(bottom)
+        p_bottom.write_digital_value(bottom)
         if p_top:
             p_top.write_mode(OUTPUT)
-            p_top.write_digital_out(top)
+            p_top.write_digital_value(top)
 
         # first read is not stable by 1MOhm because of A/D capacitor
         if R > 10000:
-            p_middle.read_analog()
-            p_middle.read_analog()
-            p_middle.read_analog()
+            p_middle.read_analog_value()
+            p_middle.read_analog_value()
+            p_middle.read_analog_value()
 
         time.sleep(0.02)
 
         for _ in range(filter_size):
             measurements.append(dict(
                                 t=timer.read(),
-                                Amiddle=p_middle.read_analog(),
+                                Amiddle=p_middle.read_analog_value(),
                                 R=R,
                                 ))
         if p_bottom_input:
@@ -62,7 +63,7 @@ class VoltageDivider(object):
                 measurements.append(dict(
                                     t=timer.read(),
                                     R=R,
-                                    Abottom=p_bottom_input.read_analog(),
+                                    Abottom=p_bottom_input.read_analog_value(),
                                     ))
         else:
             measurements.append(dict(
@@ -75,7 +76,7 @@ class VoltageDivider(object):
                 measurements.append(dict(
                                     t=timer.read(),
                                     R=R,
-                                    Atop=p_top_input.read_analog(),
+                                    Atop=p_top_input.read_analog_value(),
                                     ))
         else:
             measurements.append(dict(
@@ -105,23 +106,23 @@ def lowR_elem(ls):
 
 
 def measure(config):
-    mcu = Arduino()
-    mcu.pins.reset()
-    vcc = mcu.vcc.voltage
+    mcu = ArduinoTree()
+    mcu.soft_reset()
+    vcc = mcu.vcc.read()
 
     timer = Stopwatch()
 
     def measure_beta(nodeB, nodeC, nodeE, polarity):
         measurements = []
-        pB = mcu.pin(nodeB.pin_middle)
-        pC = mcu.pin(nodeC.pin_middle)
-        pE = mcu.pin(nodeE.pin_middle)
+        pB = mcu.pin.get(nodeB.pin_middle)
+        pC = mcu.pin.get(nodeC.pin_middle)
+        pE = mcu.pin.get(nodeE.pin_middle)
 
         elemRb = highR_elem(nodeB.toplist)
         elemRc = lowR_elem(nodeC.toplist)
 
-        pRb = mcu.pin(elemRb.pin_rail)
-        pRc = mcu.pin(elemRc.pin_rail)
+        pRb = mcu.pin.get(elemRb.pin_rail)
+        pRc = mcu.pin.get(elemRc.pin_rail)
 
         Rb = elemRb.R
         Rc = elemRc.R
@@ -139,24 +140,24 @@ def measure(config):
         pRc.write_mode(OUTPUT)
 
         if (polarity == 'NPN'):
-            pE.write_digital_out(0)
-            pRb.write_digital_out(1)
-            pRc.write_digital_out(1)
+            pE.write_digital_value(0)
+            pRb.write_digital_value(1)
+            pRc.write_digital_value(1)
         else:
-            pE.write_digital_out(1)
-            pRb.write_digital_out(0)
-            pRc.write_digital_out(0)
+            pE.write_digital_value(1)
+            pRb.write_digital_value(0)
+            pRc.write_digital_value(0)
 
         delay()
 
-        pB.read_analog()
-        pB.read_analog()
-        pB.read_analog()
+        pB.read_analog_value()
+        pB.read_analog_value()
+        pB.read_analog_value()
 
         for _ in range(config.filter_size):
             measurements.append(dict(
                                 t=timer.read(),
-                                Ab=pB.read_analog(),
+                                Ab=pB.read_analog_value(),
                                 Rb=Rb,
                                 Rc=Rc,
                                 polarity=polarity,
@@ -165,14 +166,14 @@ def measure(config):
                                 E=nodeE.name,
                                 ))
 
-        pC.read_analog()
-        pC.read_analog()
-        pC.read_analog()
+        pC.read_analog_value()
+        pC.read_analog_value()
+        pC.read_analog_value()
 
         for _ in range(config.filter_size):
             measurements.append(dict(
                                 t=timer.read(),
-                                Ac=pC.read_analog(),
+                                Ac=pC.read_analog_value(),
                                 Rb=Rb,
                                 Rc=Rc,
                                 polarity=polarity,
@@ -202,7 +203,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.model,
+        model=mcu.avr_name,
         measurements=measurements,
     )
 

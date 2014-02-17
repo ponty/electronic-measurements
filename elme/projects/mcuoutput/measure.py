@@ -1,36 +1,38 @@
 from __future__ import division
-from softusbduino import Arduino
-from softusbduino.const import OUTPUT
+from nanpy.arduinotree import ArduinoTree
 from elme.pwm import PwmManager
 from elme.timer import Stopwatch
 import logging
+from nanpy.arduinotree import ArduinoTree
 
 log = logging.getLogger(__name__)
 
 
+INPUT,OUTPUT=0,1
+
 def measure(config):
-    mcu = Arduino()
-    mcu.pins.reset()
-    vcc = mcu.vcc.voltage
-    p_pwm = mcu.pin(config.pin_pwm)
+    mcu = ArduinoTree()
+    mcu.soft_reset()
+    vcc = mcu.vcc.read()
+    p_pwm = mcu.pin.get(config.pin_pwm)
     pwm_manager = PwmManager(config.pwm, [p_pwm])
 #    pwm = p_pwm.pwm
-    p_amp = mcu.pin(config.pin_amp_out)
-    p_out_an = mcu.pin(config.pin_out_an)
-    p_out_dig = mcu.pin(config.pin_out_dig)
+    p_amp = mcu.pin.get(config.pin_amp_out)
+    p_out_an = mcu.pin.get(config.pin_out_an)
+    p_out_dig = mcu.pin.get(config.pin_out_dig)
     timer = Stopwatch()
 
 #    pwm.divisor = config.pwm.divisor
 
     def meas(dig_out):
-        p_out_dig.write_digital_out(dig_out)
+        p_out_dig.write_digital_value(dig_out)
 
         def loop(measurements, pwm_value):
             measurements.append(dict(
                                 t=timer.read(),
                                 pwm_value=pwm_value,
-                                Aamp=p_amp.read_analog(),
-                                Aout=p_out_an.read_analog(),
+                                Aamp=p_amp.read_analog_value(),
+                                Aout=p_out_an.read_analog_value(),
                                 Dout=dig_out,
                                 ))
         measurements = pwm_manager.measure(loop)
@@ -48,7 +50,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.model,
+        model=mcu.avr_name,
         frequency=p_pwm.pwm.frequency,
         measurements=measurements,
     )

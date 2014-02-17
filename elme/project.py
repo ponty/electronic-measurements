@@ -1,12 +1,10 @@
 from __future__ import division
 from StringIO import StringIO
 from bunch import bunchify, unbunchify
-from decotrace import traced
 from easyprocess import EasyProcess
 from elme import dumper
 from path import path
 from prettyprint.prettyprint import pp_str
-from softusbduino.memo import memoized
 from zipfile import ZipFile, ZIP_DEFLATED
 import datetime
 import importlib
@@ -14,6 +12,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import sys
 import time
+from elme.memo import memoized
 
 root = path(__file__).parent
 

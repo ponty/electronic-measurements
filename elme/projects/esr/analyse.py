@@ -1,8 +1,8 @@
 from __future__ import division
-from softusbduino.filters import average
-from softusbduino.util import an2v
 from elme.analyse import segmented_measurements, averaged_median_arr
+from elme.util import an2v, average
 from uncertainties import ufloat
+
 
 # map_calibration_open = [
 #    0.979087650701,

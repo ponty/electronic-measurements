@@ -1,29 +1,28 @@
 from __future__ import division
 from elme.timer import Stopwatch
-from softusbduino import Arduino
-from softusbduino.const import OUTPUT
-from softusbduino.const import INPUT
+from nanpy.arduinotree import ArduinoTree
 from uncertainties import nominal_value
 
+INPUT,OUTPUT=0,1
 
 def measure(config):
-    mcu = Arduino()
-    mcu.pins.reset()
-    vcc = mcu.vcc.voltage
-    p_enable_input = mcu.pin(config.pin_enable_input)
+    mcu = ArduinoTree()
+    mcu.soft_reset()
+    vcc = mcu.vcc.read()
+    p_enable_input = mcu.pin.get(config.pin_enable_input)
 
     timer = Stopwatch()
 
     def measure1(enable_input, repeat):
         if enable_input:
             p_enable_input.write_mode(OUTPUT)
-            p_enable_input.write_digital_out(1)
+            p_enable_input.write_digital_value(1)
         else:
             p_enable_input.reset()
         measurements = []
 
         for _ in range(repeat):
-            f = mcu.counter.run(config.gate_time)
+            f = mcu.counter.read(config.gate_time)
             measurements.append(dict(
                                 t=timer.read(),
                                 frequency=nominal_value(f),
@@ -45,9 +44,9 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.model,
+        model=mcu.avr_name,
         measurements=measurements,
-        gate_time=mcu.counter.gate_time,
+        gate_time=config.gate_time,
     )
 
     return data

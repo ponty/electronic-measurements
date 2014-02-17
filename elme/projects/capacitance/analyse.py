@@ -2,10 +2,11 @@ from __future__ import division
 from elme.analyse import segmented_measurements
 from elme.pandasext import ColsProxy, movecol
 from pandas.core.frame import DataFrame
-from softusbduino.util import u_an2v
 from uncertainties import ufloat, nominal_value, umath, unumpy
 from uncertainties.unumpy.core import uarray
 import numpy as np
+from elme.util import an2v
+
 
 terror = 1e-3  # estimation
 

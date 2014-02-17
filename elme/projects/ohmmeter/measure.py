@@ -1,8 +1,8 @@
 from __future__ import division
-from softusbduino import Arduino
-from softusbduino.const import OUTPUT
+from nanpy.arduinotree import ArduinoTree
 from elme.timer import Stopwatch
 import time
+from nanpy.arduinotree import ArduinoTree
 
 
 # Test:
@@ -11,16 +11,18 @@ import time
 # INVERT=1    Arail=0  -> better
 INVERT = 1
 
+INPUT,OUTPUT=0,1
+
 
 def measure(config):
-    mcu = Arduino()
-    mcu.pins.reset()
-    vcc = mcu.vcc.voltage
-    p_middle = mcu.pin(config.pin_middle)
+    mcu = ArduinoTree()
+    mcu.soft_reset()
+    vcc = mcu.vcc.read()
+    p_middle = mcu.pin.get(config.pin_middle)
     if config.pullup:
         assert INVERT
     p_middle.write_pullup(config.pullup)
-    # p_bottom = mcu.pin(config.pin_bottom)
+    # p_bottom = mcu.pin.get(config.pin_bottom)
 
     timer = Stopwatch()
 
@@ -39,18 +41,18 @@ def measure(config):
 
 #        p_bottom.mode =
         pin_rail.write_mode(OUTPUT)
-#        p_bottom.write_digital_out(bottom)
-        pin_rail.write_digital_out(top)
+#        p_bottom.write_digital_value(bottom)
+        pin_rail.write_digital_value(top)
 
         # first read is not stable by 1MOhm because of A/D capacitor
-        p_middle.read_analog()
-        p_middle.read_analog()
-        p_middle.read_analog()
+        p_middle.read_analog_value()
+        p_middle.read_analog_value()
+        p_middle.read_analog_value()
 
         time.sleep(0.02)
 
         for _ in range(config.window):
-            Amiddle = p_middle.read_analog()
+            Amiddle = p_middle.read_analog_value()
             measurements.append(dict(
                                 t=timer.read(),
                                 Amiddle=Amiddle,
@@ -58,7 +60,7 @@ def measure(config):
                                 ))
         if pin_input:
             for _ in range(config.window):
-                Atop = pin_input.read_analog()
+                Atop = pin_input.read_analog_value()
                 measurements.append(dict(
                                     t=timer.read(),
                                     R=R,
@@ -81,11 +83,11 @@ def measure(config):
 
     measurements = []
     for d in config.toplist:
-        pin_rail = mcu.pin(d['pin_rail'])
+        pin_rail = mcu.pin.get(d['pin_rail'])
 
         pin_input = None
         if 'pin_input' in d:
-            pin_input = mcu.pin(d['pin_input'])
+            pin_input = mcu.pin.get(d['pin_input'])
 
         R = d['R']
         measurements += measure1(pin_rail, pin_input, R)
@@ -93,7 +95,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.model,
+        model=mcu.avr_name,
         measurements=measurements,
     )
 

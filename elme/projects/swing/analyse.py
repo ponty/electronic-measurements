@@ -1,6 +1,5 @@
 from __future__ import division
 from bunch import bunchify
-from softusbduino.util import an2v
 from elme.analyse import filter_measurements
 from elme.projects.swing.circuit import Circuit
 

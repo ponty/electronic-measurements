@@ -1,5 +1,5 @@
 from __future__ import division
-from softusbduino import Arduino
+from nanpy.arduinotree import ArduinoTree
 from elme.pwm import PwmManager
 from elme.timer import Stopwatch
 import logging
@@ -8,12 +8,12 @@ log = logging.getLogger(__name__)
 
 
 def measure(config):
-    mcu = Arduino()
-    mcu.pins.reset()
-    vcc = mcu.vcc.voltage
-    p_pwm = mcu.pin(config.pin_pwm)
+    mcu = ArduinoTree()
+    mcu.soft_reset()
+    vcc = mcu.vcc.read()
+    p_pwm = mcu.pin.get(config.pin_pwm)
     pwm_manager = PwmManager(config.pwm, [p_pwm])
-    p_in = mcu.pin(config.pin_in)
+    p_in = mcu.pin.get(config.pin_in)
     timer = Stopwatch()
 
     # max freq
@@ -25,7 +25,7 @@ def measure(config):
             measurements.append(dict(
                                 t=timer.read(),
                                 pwm_value=pwm_value,
-                                Ain=p_in.read_analog(),
+                                Ain=p_in.read_analog_value(),
                                 ))
         measurements = pwm_manager.measure(loop)
 
@@ -41,7 +41,7 @@ def measure(config):
 #            pwm.write_value(i)
 #            time.sleep(config.wait)
 
-#            A = p_in.read_analog()
+#            A = p_in.read_analog_value()
 #            measurements.append(dict(
 #                                t=timer.read(),
 #                                pwm_value=i,
@@ -51,7 +51,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.model,
+        model=mcu.avr_name,
         measurements=meas(),
         frequency=p_pwm.pwm.frequency,
     )

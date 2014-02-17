@@ -1,7 +1,7 @@
 from __future__ import division
-from softusbduino.util import an2v, pwm2v
 from elme.analyse import filter_measurements
 from elme.plotutil import FigureWrapper
+from elme.util import an2v
 
 
 def analog_value_time_plot(data, fig, voltage=False):

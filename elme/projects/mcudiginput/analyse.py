@@ -1,6 +1,6 @@
 from __future__ import division
 from elme.analyse import filter_measurements
-from softusbduino.util import an2v
+from elme.util import an2v
 
 
 # @traced

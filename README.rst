@@ -9,15 +9,15 @@ Links:
 
 
 Install
-=======================
+=======
 
  * build additional hardware for the project
- * install softusbduino_ (Python library, firmware in Arduino, V-USB hardware)
+ * install Nanpy_ (Python library, firmware in Arduino, V-USB hardware)
  * install pandas_
 
 
 .. _arduino: http://arduino.cc/
 .. _python: http://www.python.org/
 .. _pandas: http://pandas.pydata.org/
-.. _softusbduino: https://github.com/ponty/softusbduino
+.. _Nanpy: https://github.com/nanpy/nanpy
 

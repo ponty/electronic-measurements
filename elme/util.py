@@ -1,3 +1,4 @@
+from __future__ import division
 from _abcoll import Iterable
 from abc import ABCMeta
 from decotrace import traced
@@ -143,9 +144,50 @@ def sleep_and_read(t, p_in):
     t0 = time.time()
     t1 = t0 + t
     while time.time() < t1:
-        p_in.read_analog()
+        p_in.read_analog_value()
 
 
 def tmpdir(dir=None, suffix=''):
     x = tempfile.mkdtemp(suffix=suffix, prefix='elme_', dir=dir)
     return path(x)
+
+
+def an2v(an, vcc):
+    if an is None:
+        return
+    return an / 1023.0 * vcc
+
+
+def an2pwm(an):
+    if an is None:
+        return
+    return int(an / 1023 * 255 + 0.5)
+
+
+
+def median(ls):
+    '''
+    median filter
+    '''
+    if not len(ls):
+        return
+    values = list(ls)
+    values.sort()
+    return values[int(len(values) / 2)]
+
+
+def average(ls):
+    if not len(ls):
+        return
+    return sum(ls) / len(ls)
+
+
+def averaged_median(ls, median_window=3):
+    if not len(ls):
+        return
+    if len(ls) <= median_window:
+        return median(ls)
+    ls2 = []
+    for i in range(len(ls) - median_window + 1):
+        ls2 += [median(ls[i:i + median_window])]
+    return average(ls2)
