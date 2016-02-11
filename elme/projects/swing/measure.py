@@ -1,13 +1,16 @@
 from __future__ import division
+
 from bunch import Bunch
+import logging
+import math
+from nanpy.arduinotree import ArduinoTree, ArduinoTree
+
 from elme.projects.swing.analyse import calculate_good_interval
 from elme.projects.swing.circuit import Circuit
 from elme.pwm import PwmManager
 from elme.timer import Stopwatch
-from elme.util import fullrange, an2pwm
-from nanpy.arduinotree import ArduinoTree, ArduinoTree
-import logging
-import math
+from elme.util import fullrange, an2pwm, avr_name
+
 
 log = logging.getLogger(__name__)
 
@@ -17,7 +20,7 @@ def measure(config):
     A = config.R2 / config.R1
 
     mcu = ArduinoTree()
-    mcu.soft_reset()
+#     mcu.soft_reset()
     vcc = mcu.vcc.read()
     timer = Stopwatch()
 
@@ -108,7 +111,7 @@ def measure(config):
 
     data = Bunch(
         vcc=vcc,
-        model=mcu.avr_name,
+        model=avr_name(mcu),
         pwm_plus_frequency=p_pwm_plus.pwm.frequency,
         pwm_minus_frequency=p_pwm_minus.pwm.frequency,
         measurements=meas_multi(),

@@ -1,14 +1,17 @@
-from elme.timer import Stopwatch
 import logging
 from nanpy.arduinotree import ArduinoTree
+
+from elme.timer import Stopwatch
+from elme.util import avr_name
+
 
 log = logging.getLogger(__name__)
 
 
 def measure(config, stop_condition=None):
     mcu = ArduinoTree()
-    if config.reset:
-        mcu.soft_reset()
+#     if config.reset:
+#         mcu.soft_reset()
     vcc = mcu.vcc.read()
     pin = mcu.pin.get(config.pin)
     interval = config.interval
@@ -28,7 +31,7 @@ def measure(config, stop_condition=None):
 
     data = dict(
         vcc=vcc,
-        model=mcu.avr_name,
+        model=avr_name(mcu),
         measurements=measurements,
     )
 

@@ -1,7 +1,7 @@
 from __future__ import division
 from elme.analyse import filter_measurements
 from elme.plotutil import FigureWrapper
-from elme.util import an2v
+from elme.util import an2v, pwm2v
 
 
 def analog_value_time_plot(data, fig, voltage=False):

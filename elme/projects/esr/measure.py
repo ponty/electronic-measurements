@@ -1,17 +1,20 @@
 from __future__ import division
+
 from math import log10
+from nanpy.arduinotree import ArduinoTree
+from nanpy.arduinotree import ArduinoTree
 from numpy import logspace
-from nanpy.arduinotree import ArduinoTree
-from elme.timer import Stopwatch
-from elme.util import sleep_and_read
 import time
-from nanpy.arduinotree import ArduinoTree
+
+from elme.timer import Stopwatch
+from elme.util import sleep_and_read, avr_name
+
 
 INPUT,OUTPUT=0,1
 
 def measure(config):
     mcu = ArduinoTree()
-    mcu.soft_reset()
+#     mcu.soft_reset()
 
     vcc = mcu.vcc.read()
     p_in = mcu.pin.get(config.pin_in)
@@ -77,7 +80,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.avr_name,
+        model=avr_name(mcu),
         measurements=measurements,
     )
 

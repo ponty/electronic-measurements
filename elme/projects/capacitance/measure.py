@@ -1,7 +1,11 @@
 from __future__ import division
+
 from nanpy.arduinotree import ArduinoTree
-from elme.timer import Stopwatch, TimeOutError
 import time
+
+from elme.timer import Stopwatch, TimeOutError
+from elme.util import avr_name
+
 
 INPUT,OUTPUT=0,1
 
@@ -15,7 +19,7 @@ def timeout_loop(timeout, loop_func):
 
 def measure(config):
     mcu = ArduinoTree()
-    mcu.soft_reset()
+#     mcu.soft_reset()
     vcc = mcu.vcc.read()
     p_middle = mcu.pin.get(config.pin_middle)
     measurements = []
@@ -113,7 +117,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.avr_name,
+        model=avr_name(mcu),
         measurements=measurements,
     )
 

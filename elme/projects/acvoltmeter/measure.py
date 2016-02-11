@@ -1,9 +1,13 @@
 from __future__ import division
-from elme.timer import Stopwatch
-from nanpy.arduinotree import ArduinoTree
+
 import logging
+from nanpy.arduinotree import ArduinoTree
 import random
 import time
+
+from elme.timer import Stopwatch
+from elme.util import avr_name
+
 
 log = logging.getLogger(__name__)
 
@@ -26,7 +30,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.avr_name,
+        model=avr_name(mcu),
         measurements=measurements,
     )
 

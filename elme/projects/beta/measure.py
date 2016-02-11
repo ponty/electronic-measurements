@@ -1,7 +1,10 @@
 from __future__ import division
+
 from nanpy.arduinotree import ArduinoTree
-from elme.timer import Stopwatch
 import time
+
+from elme.timer import Stopwatch
+from elme.util import avr_name
 
 
 INPUT,OUTPUT=0,1
@@ -107,7 +110,7 @@ def lowR_elem(ls):
 
 def measure(config):
     mcu = ArduinoTree()
-    mcu.soft_reset()
+#     mcu.soft_reset()
     vcc = mcu.vcc.read()
 
     timer = Stopwatch()
@@ -203,7 +206,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.avr_name,
+        model=avr_name(mcu),
         measurements=measurements,
     )
 

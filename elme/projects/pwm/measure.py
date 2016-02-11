@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 def measure(config):
     mcu = ArduinoTree()
-    mcu.soft_reset()
+#     mcu.soft_reset()
     vcc = mcu.vcc.read()
     p_pwm = mcu.pin.get(config.pin_pwm)
     pwm_manager = PwmManager(config.pwm, [p_pwm])
@@ -51,7 +51,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.avr_name,
+        model=mcu.firmware_info['avr_name'],
         measurements=meas(),
         frequency=p_pwm.pwm.frequency,
     )

@@ -1,8 +1,11 @@
 from __future__ import division
+
 from nanpy.arduinotree import ArduinoTree
-from elme.timer import Stopwatch
+from nanpy.arduinotree import ArduinoTree
 import time
-from nanpy.arduinotree import ArduinoTree
+
+from elme.timer import Stopwatch
+from elme.util import avr_name
 
 
 # Test:
@@ -16,7 +19,7 @@ INPUT,OUTPUT=0,1
 
 def measure(config):
     mcu = ArduinoTree()
-    mcu.soft_reset()
+#     mcu.soft_reset()
     vcc = mcu.vcc.read()
     p_middle = mcu.pin.get(config.pin_middle)
     if config.pullup:
@@ -95,7 +98,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.avr_name,
+        model=avr_name(mcu),
         measurements=measurements,
     )
 

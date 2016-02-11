@@ -1,7 +1,10 @@
 from __future__ import division
-from elme.timer import Stopwatch
+
 from nanpy.arduinotree import ArduinoTree
 from uncertainties import nominal_value
+
+from elme.timer import Stopwatch
+from elme.util import avr_name
 
 
 def measure(config):
@@ -25,7 +28,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.avr_name,
+        model=avr_name(mcu),
         measurements=measurements,
         gate_time=config.gate_time,
     )

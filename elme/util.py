@@ -157,6 +157,10 @@ def an2v(an, vcc):
         return
     return an / 1023.0 * vcc
 
+def pwm2v(an, vcc):
+    if an is None:
+        return
+    return an / 255.0 * vcc
 
 def an2pwm(an):
     if an is None:
@@ -191,3 +195,7 @@ def averaged_median(ls, median_window=3):
     for i in range(len(ls) - median_window + 1):
         ls2 += [median(ls[i:i + median_window])]
     return average(ls2)
+
+def avr_name(mcu):
+    return mcu.firmware_info['avr_name'],
+    
