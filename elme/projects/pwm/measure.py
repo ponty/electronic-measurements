@@ -1,8 +1,12 @@
 from __future__ import division
+
+import logging
 from nanpy.arduinotree import ArduinoTree
+
 from elme.pwm import PwmManager
 from elme.timer import Stopwatch
-import logging
+from elme.util import avr_name
+
 
 log = logging.getLogger(__name__)
 
@@ -51,7 +55,7 @@ def measure(config):
 
     data = dict(
         vcc=vcc,
-        model=mcu.firmware_info['avr_name'],
+        model=avr_name(mcu),
         measurements=meas(),
         frequency=p_pwm.pwm.frequency,
     )
