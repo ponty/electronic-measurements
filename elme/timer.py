@@ -1,3 +1,5 @@
+from __future__ import division
+
 import datetime
 import time
 
@@ -26,10 +28,12 @@ class TimeOutError(Exception):
 
 
 class Stopwatch(object):
-
-    def __init__(self):
+    _tlast_log = 0
+    
+    def __init__(self, count=None):
+        self._count=count
         self.start()
-
+        
     def start(self):
         self._tlast = self._tstart = time.time()
     restart = start
@@ -50,3 +54,13 @@ class Stopwatch(object):
                                                                     tfrom,
                                                                     tto,
                                                                     ))
+            
+    def next(self, measurements):
+        t = time.time()
+        if t-self._tlast_log > 1:
+            self._tlast_log=t
+            if self._count is not None:
+                print  100*len(measurements) / self._count, '%'
+            else:
+                print  len(measurements)
+                

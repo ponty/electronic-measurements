@@ -18,7 +18,7 @@ def measure(config):
 #     mcu.soft_reset()
     vcc = mcu.vcc.read()
     p_in = mcu.pin.get(config.pin_in)
-    timer = Stopwatch()
+    timer = Stopwatch(config.count)
 
     measurements = []
     for i in range(config.count):
@@ -27,6 +27,7 @@ def measure(config):
                                 Ain=p_in.read_analog_value(),
                                 ))
             time.sleep(random.random() * config.max_sleep)
+            timer.next(measurements)
 
     data = dict(
         vcc=vcc,
