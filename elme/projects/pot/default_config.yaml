@@ -1,0 +1,4 @@
+pin_in: A0
+pin_inc: 2
+pin_ud: 3
+pin_cs: 4
