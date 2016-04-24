@@ -197,5 +197,5 @@ def averaged_median(ls, median_window=3):
     return average(ls2)
 
 def avr_name(mcu):
-    return mcu.firmware_info['avr_name'],
+    return mcu.firmware_info['avr_name']
     

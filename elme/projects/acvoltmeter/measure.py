@@ -15,7 +15,6 @@ log = logging.getLogger(__name__)
 def measure(config):
     random.seed()
     mcu = ArduinoTree()
-#     mcu.soft_reset()
     vcc = mcu.vcc.read()
     p_in = mcu.pin.get(config.pin_in)
     timer = Stopwatch(config.count)
