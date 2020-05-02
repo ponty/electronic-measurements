@@ -1,38 +1,48 @@
 from __future__ import division
+from elme.analyse import filter_measurements
+from elme.pandasext import ColsProxy
+import pandas
 from elme.util import an2v
 
-
 def analyse(data):
-    m = data.measurements
+    pass
 
+
+def calc_Vin(Ain, vcc, volt_division):
+    Vin = an2v(Ain, vcc) * volt_division
+    return Vin
+
+def calc_Iin(Ahall, vcc, hall_VperA):
+    Iin = an2v(512 - Ahall, vcc) / hall_VperA
+    return Iin
+
+def extend(data):
+    m = data.measurements
+#     print 'm',m
+#     m = filter_measurements(
+#         data.measurements,
+#         ['pwm_value', 'rail'],
+#         ['Aout', 'Ain', 'Aamp'])
+
+#     R = data.config.R
+    volt_division = data.config.volt_division
+    hall_VperA = data.config.hall_VperA
     vcc = data.vcc
 
-    stats = m.Ain.describe()
+#     data.Vmax = data.vcc
+#     data.Imax = data.vcc / R
 
-    count = stats['count']
-    Amean = stats['mean']
-    Amin = stats['min']
-    Amax = stats['max']
-    Arange = Amax - Amin
-    Amiddle = (Amin + Amax) / 2
-    duty_cycle = len(m.Ain[m.Ain > Amiddle]) / len(m.Ain)
 
-    Astd = stats['std']
-    Arms = (Astd ** 2 + Amean ** 2) ** 0.5
+    col = ColsProxy(m)
+    col.Vin = calc_Vin(col.Ain, vcc, volt_division)
+#     col.Vout = an2v(col.Aout, vcc)
+#     col.Vamp = an2v(col.Aamp, vcc)
+#     col.Vx = col.Vout - col.Vin
+    col.Iin = an2v(512 - col.Ahall, vcc) / hall_VperA
+#     m = m.sort_index(by='Vx')
 
-    return dict(
-                count=count,
-        Amin=Amin,
-        Amax=Amax,
-        Arange=Arange,
-        Amean=Amean,
-        duty_cycle=duty_cycle,
-        Astd=Astd,
-        Arms=Arms,
-        Vmean=an2v(Amean, vcc),
-        Vstd=an2v(Astd, vcc),
-        Vrms=an2v(Arms, vcc),
-        Vmin=an2v(Amin, vcc),
-        Vmax=an2v(Amax, vcc),
-        Vrange=an2v(Arange, vcc),
-    )
+#     col.I = pandas.rolling_median(col.I, window=5)
+
+#     print 'col',col
+#     print 'm',m
+    data.measurements = m

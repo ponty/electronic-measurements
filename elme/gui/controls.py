@@ -91,10 +91,10 @@ def table(name, **kwargs):
 def slider(name, low=0, high=100, is_float=True):
     return Item(name=name,
                 editor=RangeEditor(
-                mode='slider',
-                low=low,
-                high=high,
-                is_float=is_float,
-                ),
+                                    mode='slider',
+                                    low=low,
+                                    high=high,
+                                    is_float=is_float,
+                                    ),
                 style='custom',
                 )

@@ -166,10 +166,10 @@ class ResistanceE12 (Float):
 def PinTrait(typ='all'):
     analog = ['A%s' % x for x in range(6)]
     digital = ['D%s' % x for x in range(14)]
-#    if typ == 'analog':
-#        return Enum(analog)
-#    if typ == 'digital':
-#        return Enum(digital)
+    if typ == 'analog':
+        return Enum(analog)
+    if typ == 'digital':
+        return Enum(digital)
 
     return Enum(['GND'] + digital + analog)
 

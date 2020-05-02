@@ -344,8 +344,7 @@ class Project(object):
         except ImportError:
             pass
 
-    def measure(self, zipfilename=''):
-        HOME_DIR.mkdir_p()
+    def measure_data(self):
         measure_func = self.submodule('measure').measure
 
         now = datetime.datetime.now()
@@ -356,11 +355,12 @@ class Project(object):
         data.config = self.config
         data.project = self.name
         data.time = str(now)
-
+        return data
+    
+    def measure(self, zipfilename=''):
+        HOME_DIR.mkdir_p()
+        data = self.measure_data()
         self.save(data)
-#        dw = CDataWrapper(data)
-
-#        dw.save(zipfilename)
 
     def analyse(self, zipfilename):
         mod=self.submodule('analyse')
